@@ -20,7 +20,7 @@ export const SamplePage = () => {
   const handleConnect = async () => {
     if (!wallet.connect) {
       window.open(
-        "https://github.com/Panda-Wallet/Panda-wallet#getting-started-alpha",
+        "https://github.com/LoongYearMeta/Turing-wallet",
         "_blank"
       );
       return;
