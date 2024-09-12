@@ -52,14 +52,14 @@ export const SamplePage = () => {
           style={{ width: "5rem", height: "5rem" }}
         />
         <h1>Turing Wallet Demo</h1>
-        <h4>First lets connect your wallet 🤑</h4>
+        <h4>First lets connect your wallet </h4>
         <TuringConnectButton onClick={handleConnect} />
         <p style={{ width: "80%", fontSize: "0.75rem", margin: "1rem" }}>
           {JSON.stringify(pubKey)}
         </p>
         {pubKey && (
           <>
-            <h4>Now lets get the addresses 💪</h4>
+            <h4>Now lets get the addresses </h4>
             <button onClick={handleGetAddresses} style={{ margin: "1rem" }}>
               Get Addresses
             </button>
