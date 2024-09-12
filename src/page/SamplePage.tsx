@@ -20,7 +20,7 @@ export const SamplePage = () => {
   const handleConnect = async () => {
     if (!wallet.connect) {
       window.open(
-        "https://github.com/LoongYearMeta/Turing-wallet",
+        "https://chromewebstore.google.com/detail/turing-wallet/hmodlkcjggjgfalgdgbflhefijojdjen?hl=zh-CN&utm_source=ext_sidebar",
         "_blank"
       );
       return;
