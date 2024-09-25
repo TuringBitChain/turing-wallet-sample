@@ -42,6 +42,7 @@ export const SamplePage = () => {
     const signRes = await wallet.signMessage({ message: messageToSign });
     if (signRes) setSignedMessage(signRes);
   };
+
   const sendTrasaction = async () => {
     const paymentParams = [
       {
@@ -104,6 +105,9 @@ export const SamplePage = () => {
             <p style={{ width: "80%", fontSize: "0.75rem", margin: "1rem" }}>
               {JSON.stringify(signedMessage)}
             </p>
+            <button onClick={sendTrasaction} style={{ margin: "1rem" }}>
+              Send transaction
+            </button>
           </>
         )}
       </header>
