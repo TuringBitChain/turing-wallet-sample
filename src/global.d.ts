@@ -1,7 +1,7 @@
-import { PandaProvider } from "./hooks/usePandaWallet";
+import { TuringProvider } from "./hooks/useTuringWallet";
 
 declare global {
   interface Window {
-    Turing: PandaProvider;
+    Turing: TuringProvider;
   }
 }
