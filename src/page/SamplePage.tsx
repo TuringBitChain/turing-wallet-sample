@@ -5,7 +5,7 @@ import {
   Addresses,
   SignedMessage,
   useTuringWallet,
-} from "turing-wallet-provider";
+} from "../turing-wallet-provider";
 
 export const SamplePage = () => {
   const wallet = useTuringWallet();
@@ -42,6 +42,28 @@ export const SamplePage = () => {
     const signRes = await wallet.signMessage({ message: messageToSign });
     if (signRes) setSignedMessage(signRes);
   };
+  const sendTrasaction = async () => {
+    const paymentParams = [
+      {
+        satoshis: 10000,
+        address: "18izL7Wtm2fx3ALoRY3MkY2VFSMjArP62D",
+      },
+      {
+        satoshis: 54000,
+        address: "1q6td54oZU8EPM1PwJcB1Z6upPyMe3Vy2",
+      },
+    ];
+    try {
+      const response = await wallet.sendTbc(paymentParams);
+      if (response) {
+        const { txid } = response;
+        console.log(txid)
+      }
+      ;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="App">
