@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { App } from "./App";
-import { TuringProvider } from "./turing-wallet-provider";
+import { TuringProvider } from "turing-wallet-provider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
