@@ -5,7 +5,7 @@ import {
   Addresses,
   SignedMessage,
   useTuringWallet,
-} from "../turing-wallet-provider";
+} from "turing-wallet-provider";
 
 export const SamplePage = () => {
   const wallet = useTuringWallet();
