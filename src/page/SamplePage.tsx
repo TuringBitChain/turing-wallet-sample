@@ -4,7 +4,8 @@ import { TuringConnectButton } from "../components/TuringConnectButton";
 import {
   Address,
   useTuringWallet,
-  TransactionFlag
+  TransactionFlag,
+  SignMessage,
 } from "turing-wallet-provider";
 
 
@@ -31,13 +32,13 @@ export const SamplePage = () => {
   };
 
   const sendTrasaction = async () => {
-    const paymentParams = [
-      {
-        flag: "P2PKH" as TransactionFlag,
-        address: "1CDYCG7D83cnxtVtDoC8LnU3PfLZTVz4NA",
-        satoshis: 10000
-      }
-    ];
+    // const paymentParams = [
+    //   {
+    //     flag: "P2PKH" as TransactionFlag,
+    //     address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
+    //     satoshis: 100000000
+    //   }
+    // ];
     // const collection_data = {
     //   collectionName: "sasa",
     //   description: "sa",
@@ -51,16 +52,24 @@ export const SamplePage = () => {
     //     collection_data: JSON.stringify(collection_data)
     //   }
     // ];
-    // const ftName = 'chii';
-    // const ftSymbol = '123';
+    // const paymentParams = [
+    //   {
+    //     flag: "NFT_TRANSFER" as TransactionFlag,
+    //     nft_contract_address: "9e201c6f6249ac1e562e71de044837bffedbb31be134bf11045682f5668e7403",
+    //     address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59"
+    //   }
+    // ]
+    // const ftName = 'test-doge';
+    // const ftSymbol = 'test';
     // const ftDecimal = 6;
-    // const ftAmount = 10000000;
+    // const ftAmount = 100000000;
     // const ft_data = {
     //   name: ftName,
     //   symbol: ftSymbol,
     //   amount: ftAmount,
     //   decimal: ftDecimal
     // }
+
     // const paymentParams = [
     //   {
     //     flag: "FT_MINT" as TransactionFlag,
@@ -69,21 +78,74 @@ export const SamplePage = () => {
     // ];
     // const paymentParams = [
     //   {
-    //     flag: "POOLNFT_INIT" as TransactionFlag,
-    //     nft_contract_address: "23cee94e310b9890033622a5d350462e52e0480c7281490e592971dade471c86",
-    //     tbc_amount: 100,
-    //     ft_amount: 1000
+    //     flag: "FT_TRANSFER" as TransactionFlag,
+    //     ft_contract_address: "70d7b6c99f8209a7bc99982df01f169f4054bd9ec3e52f178d54c144886cb3b7",
+    //     address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
+    //     ft_amount: 5
     //   }
     // ];
-    try {
-      const response = await wallet.sendTransaction(paymentParams);
-      if (response) {
-        const { txid } = response;
-        console.log(txid)
-      };
-    } catch (error) {
-      console.log(error);
-    }
+    // const paymentParams = [
+    //   {
+    //     flag: "POOLNFT_MINT" as TransactionFlag,
+    //     ft_contract_address: "70d7b6c99f8209a7bc99982df01f169f4054bd9ec3e52f178d54c144886cb3b7",
+    //   }
+    // ];
+    // const paymentParams = [
+    //   {
+    //     flag: "POOLNFT_INIT" as TransactionFlag,
+    //     nft_contract_address: "e01a8aa88435dec02d11d2e11784966647c301d330c3dfcb504caede617e409c",
+    //     address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
+    //     tbc_amount: 30,
+    //     ft_amount: 800
+    //   }
+    // ];
+    // const paymentParams = [{
+    //   flag: "POOLNFT_SWAP_TO_TOKEN" as TransactionFlag,
+    //   nft_contract_address: "e01a8aa88435dec02d11d2e11784966647c301d330c3dfcb504caede617e409c",
+    //   address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
+    //   tbc_amount: 1
+    // }];
+
+    // try {
+
+
+    //   const response = await wallet.sendTransaction(paymentParams);
+
+    //   if (response) {
+    //     const { txid } = response;
+    //     console.log('txid', txid);
+
+    //   };
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    // try {
+    //   const encryptedMessage = await wallet.encrypt({ message: "hello world" });
+
+    //   if (encryptedMessage) {
+    //     console.log(encryptedMessage);
+
+
+    //   } else {
+    //     throw new Error("error")
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    // try {
+    //   const decryptedMessage = await wallet.decrypt({ message: "QklFMQItwlHhlrCeCjDPVJL3/2oTgIFUX6zYECLsDqvaFDVXMJgt1omx+cg32EbzwsOjZpZ6Df4mvI9QJkrpPNRIsjk1AbkcaMDc6IBWdsJ2agm6sA==" });
+
+    //   if (decryptedMessage) {
+    //     console.log(decryptedMessage);
+
+
+    //   } else {
+    //     throw new Error("error")
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
   }
 
   return (
