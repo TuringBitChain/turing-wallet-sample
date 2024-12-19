@@ -76,14 +76,14 @@ export const SamplePage = () => {
     //     ft_data: JSON.stringify(ft_data)
     //   }
     // ];
-    // const paymentParams = [
-    //   {
-    //     flag: "FT_TRANSFER" as TransactionFlag,
-    //     ft_contract_address: "70d7b6c99f8209a7bc99982df01f169f4054bd9ec3e52f178d54c144886cb3b7",
-    //     address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
-    //     ft_amount: 5
-    //   }
-    // ];
+    const paymentParams = [
+      {
+        flag: "FT_TRANSFER" as TransactionFlag,
+        ft_contract_address: "70d7b6c99f8209a7bc99982df01f169f4054bd9ec3e52f178d54c144886cb3b7",
+        address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
+        ft_amount: 9986700
+      }
+    ];
     // const paymentParams = [
     //   {
     //     flag: "POOLNFT_MINT" as TransactionFlag,
@@ -107,12 +107,12 @@ export const SamplePage = () => {
     //     tbc_amount: 30
     //   }
     // ];
-    const paymentParams = [{
-      flag: "POOLNFT_SWAP_TO_TBC" as TransactionFlag,
-      nft_contract_address: "e01a8aa88435dec02d11d2e11784966647c301d330c3dfcb504caede617e409c",
-      address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
-      ft_amount: 100
-    }];
+    // const paymentParams = [{
+    //   flag: "POOLNFT_SWAP_TO_TBC" as TransactionFlag,
+    //   nft_contract_address: "e01a8aa88435dec02d11d2e11784966647c301d330c3dfcb504caede617e409c",
+    //   address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
+    //   ft_amount: 100
+    // }];
 
     try {
 
