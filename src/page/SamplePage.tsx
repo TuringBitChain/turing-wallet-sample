@@ -99,26 +99,34 @@ export const SamplePage = () => {
     //     ft_amount: 800
     //   }
     // ];
-    // const paymentParams = [{
-    //   flag: "POOLNFT_SWAP_TO_TOKEN" as TransactionFlag,
-    //   nft_contract_address: "e01a8aa88435dec02d11d2e11784966647c301d330c3dfcb504caede617e409c",
-    //   address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
-    //   tbc_amount: 1
-    // }];
+    // const paymentParams = [
+    //   {
+    //     flag: "POOLNFT_LP_INCREASE" as TransactionFlag,
+    //     nft_contract_address: "e01a8aa88435dec02d11d2e11784966647c301d330c3dfcb504caede617e409c",
+    //     address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
+    //     tbc_amount: 30
+    //   }
+    // ];
+    const paymentParams = [{
+      flag: "POOLNFT_SWAP_TO_TBC" as TransactionFlag,
+      nft_contract_address: "e01a8aa88435dec02d11d2e11784966647c301d330c3dfcb504caede617e409c",
+      address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
+      ft_amount: 100
+    }];
 
-    // try {
+    try {
 
 
-    //   const response = await wallet.sendTransaction(paymentParams);
+      const response = await wallet.sendTransaction(paymentParams);
 
-    //   if (response) {
-    //     const { txid } = response;
-    //     console.log('txid', txid);
+      if (response) {
+        const { txid } = response;
+        console.log('txid', txid);
 
-    //   };
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      };
+    } catch (error) {
+      console.log(error);
+    }
     // try {
     //   const encryptedMessage = await wallet.encrypt({ message: "hello world" });
 
