@@ -59,31 +59,31 @@ export const SamplePage = () => {
     //     address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59"
     //   }
     // ]
-    // const ftName = 'test-doge';
-    // const ftSymbol = 'test';
-    // const ftDecimal = 6;
-    // const ftAmount = 100000000;
-    // const ft_data = {
-    //   name: ftName,
-    //   symbol: ftSymbol,
-    //   amount: ftAmount,
-    //   decimal: ftDecimal
-    // }
+    const ftName = 'tbci';
+    const ftSymbol = 'tbci';
+    const ftDecimal = 6;
+    const ftAmount = 150000000;
+    const ft_data = {
+      name: ftName,
+      symbol: ftSymbol,
+      amount: ftAmount,
+      decimal: ftDecimal
+    }
 
-    // const paymentParams = [
-    //   {
-    //     flag: "FT_MINT" as TransactionFlag,
-    //     ft_data: JSON.stringify(ft_data)
-    //   }
-    // ];
     const paymentParams = [
       {
-        flag: "FT_TRANSFER" as TransactionFlag,
-        ft_contract_address: "70d7b6c99f8209a7bc99982df01f169f4054bd9ec3e52f178d54c144886cb3b7",
-        address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
-        ft_amount: 9986700
+        flag: "FT_MINT" as TransactionFlag,
+        ft_data: JSON.stringify(ft_data)
       }
     ];
+    // const paymentParams = [
+    //   {
+    //     flag: "FT_TRANSFER" as TransactionFlag,
+    //     ft_contract_address: "70d7b6c99f8209a7bc99982df01f169f4054bd9ec3e52f178d54c144886cb3b7",
+    //     address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
+    //     ft_amount: 9986700
+    //   }
+    // ];
     // const paymentParams = [
     //   {
     //     flag: "POOLNFT_MINT" as TransactionFlag,
