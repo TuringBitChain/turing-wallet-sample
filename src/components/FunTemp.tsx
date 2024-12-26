@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 export type FunTempProps = {
-  onClick: () => void; // 点击主按钮的逻辑
+  onClick: (result: {
+    flag: string;
+    [key: string]: string | number;
+  }[]) => void; // 点击主按钮时返回结果
   params: {
     param1: string; // 按钮的文本内容
-    param2lab: string[] | { [key: string]: string }; // 支持两种类型：数组（无默认值）或对象（有默认值）
+    param2lab: string[] | { [key: string]: string }; // 支持数组（无默认值）或对象（有默认值）
   };
 };
 
@@ -14,7 +17,6 @@ export const FunTempButton: React.FC<FunTempProps> = ({ onClick, params }) => {
 
   // 初始化输入框的默认值
   useEffect(() => {
-    // 如果 param2lab 是数组（无默认值），初始化为空字符串
     if (Array.isArray(params.param2lab)) {
       const initialInputs = params.param2lab.reduce((acc, label) => {
         acc[label] = ""; // 初始化为空字符串
@@ -22,7 +24,6 @@ export const FunTempButton: React.FC<FunTempProps> = ({ onClick, params }) => {
       }, {} as { [key: string]: string });
       setInputs(initialInputs);
     } else {
-      // 如果 param2lab 是对象（有默认值）
       setInputs({ ...params.param2lab });
     }
   }, [params.param2lab]);
@@ -37,11 +38,26 @@ export const FunTempButton: React.FC<FunTempProps> = ({ onClick, params }) => {
     setInputs({ ...inputs, [key]: value });
   };
 
+  // 点击主按钮时返回数据结构
+  const handleButtonClick = () => {    
+    const result = [
+      {
+        flag: params.param1, // param1 作为 flag
+        ...Object.entries(inputs).reduce((acc, [key, value]) => {
+          // 尝试将值转换为数字，如果转换成功则使用数字，否则保留原始字符串
+          acc[key] = isNaN(Number(value)) ? value : Number(value);
+          return acc;
+        }, {} as { [key: string]: string | number }),
+      },
+    ];
+    onClick(result); // 将结果传递给 onClick
+  };
+
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
       {/* 主按钮 */}
       <button
-        onClick={onClick}
+        onClick={handleButtonClick}
         style={{
           display: "flex",
           alignItems: "center",
@@ -73,6 +89,7 @@ export const FunTempButton: React.FC<FunTempProps> = ({ onClick, params }) => {
           ▼
         </span>
       </button>
+
 
       {/* 下拉页面 */}
       {showDropdown && (

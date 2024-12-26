@@ -39,14 +39,15 @@ export const FunTempButton: React.FC<FunTempProps> = ({ onClick, params }) => {
   };
 
   // 点击主按钮时返回数据结构
-  const handleButtonClick = () => {
-    console.log("flag:",params.param1);
-    console.log("inputs:",inputs);
-    
+  const handleButtonClick = () => {    
     const result = [
       {
         flag: params.param1, // param1 作为 flag
-        ...inputs, // 其余为输入框的键值对
+        ...Object.entries(inputs).reduce((acc, [key, value]) => {
+          // 尝试将值转换为数字，如果转换成功则使用数字，否则保留原始字符串
+          acc[key] = isNaN(Number(value)) ? value : Number(value);
+          return acc;
+        }, {} as { [key: string]: string | number }),
       },
     ];
     onClick(result); // 将结果传递给 onClick
