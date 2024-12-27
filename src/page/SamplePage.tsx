@@ -159,7 +159,7 @@ export const SamplePage = () => {
 
   // FTLP_MERGE
   const FTLP_MERGE_params = {
-    param1: "POOLNFT_MERGE",            // 指示交易类型为合并 Pool NFT
+    param1: "FTLP_MERGE",            // 指示交易类型为合并 Pool NFT
     param2lab:{
       nft_contract_address: ""           // pool NFT 合约地址，指明要合并的 NFT 合约
     }
