@@ -317,7 +317,9 @@ export const SamplePage = () => {
         <FunTempButton onClick={handle_POOLNFT_SWAP_TO_TOKEN_fun_click} params={poolnft_swap_to_token_params} />
         <FunTempButton onClick={handle_POOLNFT_MERGE_fun_click} params={POOLNFT_MERGE_params} />
         <FunTempButton onClick={handle_FTLP_MERGE_fun_click} params={FTLP_MERGE_params} />
-        
+      </div>
+      <h1></h1>
+      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         <FunTempButton onClick={handle_POOLNFT_LP_INCREASE_fun_click} params={poolnft_lp_increase_params} />
         <FunTempButton onClick={handle_POOLNFT_SWAP_TO_TBC_fun_click} params={swap_to_tbcparams} />
       </div>
