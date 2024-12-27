@@ -88,6 +88,87 @@ export const SamplePage = () => {
     walletSendTransaction(result);
   };
 
+  // NFT_CREATE
+  const nft_create_params = {
+    param1: "NFT_CREATE",        // 指示交易类型为创建 NFT
+    param2lab:{
+      nft_data: "",             // 创建 NFT 所需的数据，通常为 JSON 格式的字符串
+      collection_id: ""         // 关联的集合 ID，指明 NFT 所属的集合
+    }
+  };
+  const handle_NFT_CREATE_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
+    console.log("Generated Data:", result);
+    walletSendTransaction(result);
+  };
+
+  // POOLNFT_INIT
+  const poolnft_init_params = {
+    param1: "POOLNFT_INIT",            // 指示交易类型为初始化 Pool NFT
+    param2lab:{
+      nft_contract_address: "",        // pool NFT 合约地址，指明要初始化的 pool NFT 合约,来源：POOLNFT_MINT
+      address: "",                     // 接收者的地址，pool NFT 将被初始化到此地址
+      tbc_amount: "30",                  // TBC 数量，用于初始化操作的数量
+      ft_amount: "1000"                  // FT 数量，用于初始化操作的数量
+    }
+  };
+  const handle_POOLNFT_INIT_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
+    console.log("Generated Data:", result);
+    walletSendTransaction(result);
+  };
+
+  // POOLNFT_LP_CONSUME
+  const poolnft_lp_consume_params = {
+    param1: "POOLNFT_LP_CONSUME",     // 指示交易类型为消耗 Pool NFT 的流动性
+    param2lab:{
+      nft_contract_address: "",        // pool NFT 合约地址，指明要消耗流动性的 NFT 合约
+      address: "",                     // 接收者的地址，流动性将被消耗到此地址
+      ft_amount: "100"                   // FT 数量，用于消耗流动性的数量
+    }
+  };
+  const handle_POOLNFT_LP_CONSUME_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
+    console.log("Generated Data:", result);
+    walletSendTransaction(result);
+  };
+
+  //POOLNFT_SWAP_TO_TOKEN
+  const poolnft_swap_to_token_params = {
+    param1: "POOLNFT_SWAP_TO_TOKEN",   // 指示交易类型为将 Pool NFT 交换为代币
+    param2lab:{
+      nft_contract_address: "",         // pool NFT 合约地址，指明要交换的 NFT 合约
+      address: "",                      // 接收者的地址，代币将被发送到此地址
+      tbc_amount: "10"                    // TBC 数量，用于交换操作中涉及的数量
+    }
+  };
+  const handle_POOLNFT_SWAP_TO_TOKEN_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
+    console.log("Generated Data:", result);
+    walletSendTransaction(result);
+  };
+
+  // POOLNFT_MERGE
+  const POOLNFT_MERGE_params = {
+    param1: "POOLNFT_MERGE",            // 指示交易类型为合并 Pool NFT
+    param2lab:{
+      nft_contract_address: "",          // pool NFT 合约地址，指明要合并的 NFT 合约
+      merge_times: "1"                     // 合并次数，范围为 1 到 10 次
+    }
+  };
+  const handle_POOLNFT_MERGE_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
+    console.log("Generated Data:", result);
+    walletSendTransaction(result);
+  };
+
+  // FTLP_MERGE
+  const FTLP_MERGE_params = {
+    param1: "POOLNFT_MERGE",            // 指示交易类型为合并 Pool NFT
+    param2lab:{
+      nft_contract_address: ""           // pool NFT 合约地址，指明要合并的 NFT 合约
+    }
+  };
+  const handle_FTLP_MERGE_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
+    console.log("Generated Data:", result);
+    walletSendTransaction(result);
+  };
+
   // NFT_TRANSFER
   const nft_transfer_params = {
     param1: "NFT_TRANSFER",
@@ -229,7 +310,14 @@ export const SamplePage = () => {
       </div>
       <h1>POOLNFT Demo</h1>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <FunTempButton onClick={handle_NFT_CREATE_fun_click} params={nft_create_params} />
+        <FunTempButton onClick={handle_POOLNFT_INIT_fun_click} params={poolnft_init_params} />
         <FunTempButton onClick={handle_POOLNFT_MINT_fun_click} params={poolnft_mint_params} />
+        <FunTempButton onClick={handle_POOLNFT_LP_CONSUME_fun_click} params={poolnft_lp_consume_params} />
+        <FunTempButton onClick={handle_POOLNFT_SWAP_TO_TOKEN_fun_click} params={poolnft_swap_to_token_params} />
+        <FunTempButton onClick={handle_POOLNFT_MERGE_fun_click} params={POOLNFT_MERGE_params} />
+        <FunTempButton onClick={handle_FTLP_MERGE_fun_click} params={FTLP_MERGE_params} />
+        
         <FunTempButton onClick={handle_POOLNFT_LP_INCREASE_fun_click} params={poolnft_lp_increase_params} />
         <FunTempButton onClick={handle_POOLNFT_SWAP_TO_TBC_fun_click} params={swap_to_tbcparams} />
       </div>
