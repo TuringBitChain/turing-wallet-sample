@@ -2,6 +2,7 @@ import { useState } from "react";
 import TuringIcon from "../assets/TuringIcon.svg";
 import { TuringConnectButton } from "../components/TuringConnectButton";
 import { FunTempButton } from "../components/FunTemp";
+import { ShowModule } from "../components/ShowModule";
 import {
   Address,
   useTuringWallet,
@@ -32,7 +33,25 @@ export const SamplePage = () => {
     if (address) setAddress(address);
   };
 
-  const [sendTrasactionInBtn, setsendTrasactionInBtn] = useState<({ flag: string; [key: string]: string | number })[] | undefined>();
+  const walletSendTransaction = async (result: { flag: string; [key: string]: string | number }[]) => {
+    const convertedResult = result.map((item) => ({
+      ...item,
+      flag: item.flag as TransactionFlag, // 强制将 flag 转为 TransactionFlag 类型
+    }));
+  
+    try {
+      const response = await wallet.sendTransaction(convertedResult);
+      if (response) {
+        const { txid } = response;
+        console.log("Transaction ID:", txid);
+      }
+    } catch (error) {
+      console.error("Transaction Error:", error);
+    }
+  }
+
+  const [isShowModuleVisible, setShowModuleVisible] = useState<boolean>(false);
+  const [showMessage, setShowMessage] = useState<({ flag: string; [key: string]: string | number })[] | undefined>();
   
   const p2pkh_params = {
     param1: "P2PKH", // 按钮的文本内容
@@ -41,9 +60,9 @@ export const SamplePage = () => {
         satoshis: "100000000",
     },
   };
-  const handle_P2PKH_fun_click = (result: { flag: string; [key: string]: string | number }[]) => {
+  const handle_P2PKH_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
     console.log("Generated Data:", result);
-    setsendTrasactionInBtn(result);
+    walletSendTransaction(result);
   };
 
   const collection_data = {
@@ -59,9 +78,9 @@ export const SamplePage = () => {
         collection_data: JSON.stringify(collection_data)
       },
   };
-  const handle_COLLECTION_CREATE_fun_click = (result: { flag: string; [key: string]: string | number }[]) => {
+  const handle_COLLECTION_CREATE_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
     console.log("Generated Data:", result);
-    setsendTrasactionInBtn(result);
+    walletSendTransaction(result);
   };
 
   const nft_transfer_params = {
@@ -71,9 +90,9 @@ export const SamplePage = () => {
         address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59"
     },
   };
-  const handle_NFT_TRANSFER_fun_click = (result: { flag: string; [key: string]: string | number }[]) => {
+  const handle_NFT_TRANSFER_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
     console.log("Generated Data:", result);
-    setsendTrasactionInBtn(result);
+    walletSendTransaction(result);
   };
 
   const ft_transfer_params = {
@@ -84,9 +103,9 @@ export const SamplePage = () => {
         ft_amount: "9986700"
     },
   };
-  const handle_FT_TRANSFER_fun_click = (result: { flag: string; [key: string]: string | number }[]) => {
+  const handle_FT_TRANSFER_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
     console.log("Generated Data:", result);
-    setsendTrasactionInBtn(result);
+    walletSendTransaction(result);
   };
 
   const poolnft_mint_params = {
@@ -95,9 +114,9 @@ export const SamplePage = () => {
       ft_contract_address: "70d7b6c99f8209a7bc99982df01f169f4054bd9ec3e52f178d54c144886cb3b7",
     },
   };
-  const handle_POOLNFT_MINT_fun_click = (result: { flag: string; [key: string]: string | number }[]) => {
+  const handle_POOLNFT_MINT_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
     console.log("Generated Data:", result);
-    setsendTrasactionInBtn(result);
+    walletSendTransaction(result);
   };
 
   const poolnft_lp_increase_params = {
@@ -108,9 +127,9 @@ export const SamplePage = () => {
         tbc_amount: "30"
     },
   };
-  const handle_POOLNFT_LP_INCREASE_fun_click = (result: { flag: string; [key: string]: string | number }[]) => {
+  const handle_POOLNFT_LP_INCREASE_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
     console.log("Generated Data:", result);
-    setsendTrasactionInBtn(result);
+    walletSendTransaction(result);
   };
 
   const swap_to_tbcparams = {
@@ -121,19 +140,12 @@ export const SamplePage = () => {
       ft_amount: "100"
     },
   };
-  const handle_POOLNFT_SWAP_TO_TBC_fun_click = (result: { flag: string; [key: string]: string | number }[]) => {
+  const handle_POOLNFT_SWAP_TO_TBC_fun_click = async (result: { flag: string; [key: string]: string | number }[]) => {
     console.log("Generated Data:", result);
-    setsendTrasactionInBtn(result);
+    walletSendTransaction(result);
   };
   
   const sendTrasaction = async () => {
-    // const paymentParams = [
-    //   {
-    //     flag: "P2PKH" as TransactionFlag,
-    //     address: "143KgKGcse57nXBnXyJwtQrf2KP4KWto59",
-    //     satoshis: 100000000
-    //   }
-    // ];
     // const collection_data = {
     //   collectionName: "sasa",
     //   description: "sa",
@@ -283,7 +295,7 @@ export const SamplePage = () => {
         </>}
       </header>
       <div style={{ padding: "2rem" }}>
-      <h1>Dropdown Button Demo</h1>
+      <h1>FT Demo</h1>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         <FunTempButton onClick={handle_P2PKH_fun_click} params={p2pkh_params} />
         <FunTempButton onClick={handle_COLLECTION_CREATE_fun_click} params={collection_create_params} />
@@ -292,6 +304,27 @@ export const SamplePage = () => {
         <FunTempButton onClick={handle_POOLNFT_MINT_fun_click} params={poolnft_mint_params} />
         <FunTempButton onClick={handle_POOLNFT_LP_INCREASE_fun_click} params={poolnft_lp_increase_params} />
         <FunTempButton onClick={handle_POOLNFT_SWAP_TO_TBC_fun_click} params={swap_to_tbcparams} />
+      </div>
+      <h1>POOLNFT Demo</h1>
+      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <FunTempButton onClick={handle_P2PKH_fun_click} params={p2pkh_params} />
+        <FunTempButton onClick={handle_COLLECTION_CREATE_fun_click} params={collection_create_params} />
+        <FunTempButton onClick={handle_NFT_TRANSFER_fun_click} params={nft_transfer_params} />
+        <FunTempButton onClick={handle_FT_TRANSFER_fun_click} params={ft_transfer_params} />
+        <FunTempButton onClick={handle_POOLNFT_MINT_fun_click} params={poolnft_mint_params} />
+        <FunTempButton onClick={handle_POOLNFT_LP_INCREASE_fun_click} params={poolnft_lp_increase_params} />
+        <FunTempButton onClick={handle_POOLNFT_SWAP_TO_TBC_fun_click} params={swap_to_tbcparams} />
+      </div>
+      <div>
+      {isShowModuleVisible && (
+        <ShowModule
+          data={showMessage}
+          onClose={() => {
+            setShowModuleVisible(false); // 隐藏模块
+            setShowMessage(undefined); // 清空数据
+          }}
+        />
+      )}
       </div>
     </div>
     </div>

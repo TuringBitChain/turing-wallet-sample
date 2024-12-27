@@ -7,7 +7,6 @@ export type ShowModuleProps = {
 
 export const ShowModule: React.FC<ShowModuleProps> = ({ data, onClose = () => {} }) => {
   const [formattedData, setFormattedData] = useState<string>("");
-  const [isVisible, setIsVisible] = useState<boolean>(true); // 控制模块是否可见
 
   useEffect(() => {
     // 将输入数据格式化为字符串以便显示
@@ -18,11 +17,8 @@ export const ShowModule: React.FC<ShowModuleProps> = ({ data, onClose = () => {}
     }
   }, [data]);
 
-  if (!isVisible) return null; // 如果模块不可见，直接返回 null
-
   const handleClose = () => {
-    setIsVisible(false); // 隐藏当前模块
-    onClose(); // 调用父组件的关闭回调函数（默认空函数）
+    onClose(); // 调用父组件的关闭回调函数
   };
 
   return (
@@ -44,7 +40,7 @@ export const ShowModule: React.FC<ShowModuleProps> = ({ data, onClose = () => {}
     >
       {/* 关闭按钮 */}
       <button
-        onClick={handleClose} // 点击时隐藏模块并调用父组件回调
+        onClick={handleClose} // 点击时调用父组件回调
         style={{
           position: "absolute",
           top: "10px",
