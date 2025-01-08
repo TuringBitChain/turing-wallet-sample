@@ -299,42 +299,43 @@ export const SamplePage = () => {
             Send transaction
           </button>
         </>}
+
+        <div style={{ padding: "2rem" }}>
+          <h1>FT Demo</h1>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <FunTempButton onClick={handle_P2PKH_fun_click} params={p2pkh_params} />
+            <FunTempButton onClick={handle_COLLECTION_CREATE_fun_click} params={collection_create_params} />
+            <FunTempButton onClick={handle_NFT_TRANSFER_fun_click} params={nft_transfer_params} />
+            <FunTempButton onClick={handle_FT_TRANSFER_fun_click} params={ft_transfer_params} />
+          </div>
+          <h1>POOLNFT Demo</h1>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <FunTempButton onClick={handle_NFT_CREATE_fun_click} params={nft_create_params} />
+            <FunTempButton onClick={handle_POOLNFT_INIT_fun_click} params={poolnft_init_params} />
+            <FunTempButton onClick={handle_POOLNFT_MINT_fun_click} params={poolnft_mint_params} />
+            <FunTempButton onClick={handle_POOLNFT_LP_CONSUME_fun_click} params={poolnft_lp_consume_params} />
+            <FunTempButton onClick={handle_POOLNFT_SWAP_TO_TOKEN_fun_click} params={poolnft_swap_to_token_params} />
+            <FunTempButton onClick={handle_POOLNFT_MERGE_fun_click} params={POOLNFT_MERGE_params} />
+            <FunTempButton onClick={handle_FTLP_MERGE_fun_click} params={FTLP_MERGE_params} />
+          </div>
+          <h1></h1>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <FunTempButton onClick={handle_POOLNFT_LP_INCREASE_fun_click} params={poolnft_lp_increase_params} />
+            <FunTempButton onClick={handle_POOLNFT_SWAP_TO_TBC_fun_click} params={swap_to_tbcparams} />
+          </div>
+          <div>
+          {isShowModuleVisible && (
+            <ShowModule
+              data={showMessage}
+              onClose={() => {
+                setShowModuleVisible(false); // 隐藏模块
+                setShowMessage(undefined); // 清空数据
+              }}
+            />
+          )}
+          </div>
+        </div>
       </header>
-      <div style={{ padding: "2rem" }}>
-      <h1>FT Demo</h1>
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        <FunTempButton onClick={handle_P2PKH_fun_click} params={p2pkh_params} />
-        <FunTempButton onClick={handle_COLLECTION_CREATE_fun_click} params={collection_create_params} />
-        <FunTempButton onClick={handle_NFT_TRANSFER_fun_click} params={nft_transfer_params} />
-        <FunTempButton onClick={handle_FT_TRANSFER_fun_click} params={ft_transfer_params} />
-      </div>
-      <h1>POOLNFT Demo</h1>
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        <FunTempButton onClick={handle_NFT_CREATE_fun_click} params={nft_create_params} />
-        <FunTempButton onClick={handle_POOLNFT_INIT_fun_click} params={poolnft_init_params} />
-        <FunTempButton onClick={handle_POOLNFT_MINT_fun_click} params={poolnft_mint_params} />
-        <FunTempButton onClick={handle_POOLNFT_LP_CONSUME_fun_click} params={poolnft_lp_consume_params} />
-        <FunTempButton onClick={handle_POOLNFT_SWAP_TO_TOKEN_fun_click} params={poolnft_swap_to_token_params} />
-        <FunTempButton onClick={handle_POOLNFT_MERGE_fun_click} params={POOLNFT_MERGE_params} />
-        <FunTempButton onClick={handle_FTLP_MERGE_fun_click} params={FTLP_MERGE_params} />
-      </div>
-      <h1></h1>
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        <FunTempButton onClick={handle_POOLNFT_LP_INCREASE_fun_click} params={poolnft_lp_increase_params} />
-        <FunTempButton onClick={handle_POOLNFT_SWAP_TO_TBC_fun_click} params={swap_to_tbcparams} />
-      </div>
-      <div>
-      {isShowModuleVisible && (
-        <ShowModule
-          data={showMessage}
-          onClose={() => {
-            setShowModuleVisible(false); // 隐藏模块
-            setShowMessage(undefined); // 清空数据
-          }}
-        />
-      )}
-      </div>
-    </div>
     </div>
   );
 };
