@@ -294,11 +294,6 @@ export const SamplePage = () => {
             </p>
           </>
         )}
-        {address && <>
-          <button onClick={sendTrasaction} style={{ margin: "1rem" }}>
-            Send transaction
-          </button>
-        </>}
 
         <div style={{ padding: "2rem" }}>
           <h1>FT Demo</h1>
