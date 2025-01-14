@@ -44,6 +44,8 @@ export const SamplePage = () => {
       const response = await wallet.sendTransaction(convertedResult);
       if (response) {
         const { txid } = response;
+        setShowMessage(txid);
+        setShowModuleVisible(true);
         console.log("Transaction ID:", txid);
       }
     } catch (error) {
