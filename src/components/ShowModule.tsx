@@ -28,7 +28,8 @@ export const ShowModule: React.FC<ShowModuleProps> = ({ data, onClose = () => {}
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: "400px",
+        width: "90%", // 使用百分比宽度以适应手机屏幕
+        maxWidth: "600px", // 最大宽度限制
         backgroundColor: "#fff",
         boxShadow: "3px 8px 16px rgba(0, 0, 0, 0.2)", // 更明显的阴影
         borderRadius: "0.5rem",
@@ -36,6 +37,8 @@ export const ShowModule: React.FC<ShowModuleProps> = ({ data, onClose = () => {}
         zIndex: 1000,
         overflow: "auto",
         maxHeight: "80vh", // 限制高度，防止数据过多导致溢出
+        marginLeft: "10px", // 左侧间距
+        marginRight: "10px", // 右侧间距
       }}
     >
       {/* 关闭按钮 */}
