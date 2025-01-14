@@ -44,7 +44,7 @@ export const SamplePage = () => {
       const response = await wallet.sendTransaction(convertedResult);
       if (response) {
         const { txid } = response;
-        setShowMessage([{ flag: 'txid', txid }]);
+        setShowMessage(response);
         setShowModuleVisible(true);
         console.log("Transaction ID:", txid);
       }
@@ -56,7 +56,7 @@ export const SamplePage = () => {
   // 控制显示模块显示隐藏
   const [isShowModuleVisible, setShowModuleVisible] = useState<boolean>(false);
   // 设置显示模块信息
-  const [showMessage, setShowMessage] = useState<({ flag: string; [key: string]: string | number })[] | undefined>();
+  const [showMessage, setShowMessage] = useState<any | undefined>();
   
   // p2pkh
   const p2pkh_params = {
