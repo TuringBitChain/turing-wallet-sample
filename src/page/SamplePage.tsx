@@ -297,7 +297,7 @@ export const SamplePage = () => {
           </>
         )}
   
-        <div style={{ padding: "2rem" }}>
+        <div style={{ padding: "2rem", margin: "0 1rem" }}> {/* 添加左右间隔 */}
           <h1>FT Demo</h1>
           <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "1rem" }}>
             <FunTempButton onClick={handle_P2PKH_fun_click} params={p2pkh_params} />
@@ -318,7 +318,7 @@ export const SamplePage = () => {
             <FunTempButton onClick={handle_POOLNFT_LP_INCREASE_fun_click} params={poolnft_lp_increase_params} />
             <FunTempButton onClick={handle_POOLNFT_SWAP_TO_TBC_fun_click} params={swap_to_tbcparams} />
           </div>
-  
+
           {isShowModuleVisible && (
             <ShowModule
               data={showMessage}
