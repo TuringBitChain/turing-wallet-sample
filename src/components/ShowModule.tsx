@@ -63,6 +63,7 @@ export const ShowModule: React.FC<ShowModuleProps> = ({ data, onClose = () => {}
           fontSize: "1.25rem",
           fontWeight: 700,
           marginBottom: "1rem",
+          color: "black", // 设置文字颜色为黑色
         }}
       >
       </h3>
@@ -71,6 +72,7 @@ export const ShowModule: React.FC<ShowModuleProps> = ({ data, onClose = () => {}
           fontSize: "1rem",
           whiteSpace: "pre-wrap", // 自动换行
           wordWrap: "break-word",
+          color: "black", // 设置文字颜色为黑色
         }}
       >
         {formattedData}
