@@ -7,7 +7,6 @@ import {
   Address,
   useTuringWallet,
   TransactionFlag,
-  SignMessage,
 } from "turing-wallet-provider";
 
 export const SamplePage = () => {
@@ -17,6 +16,18 @@ export const SamplePage = () => {
   const [messageToSign, setMessageToSign] = useState<string>("");
   const [messageEncoding, setMessageEncoding] = useState<"base64" | "utf8" | "hex">("utf8");
   const [signatureResponse, setSignatureResponse] = useState<string>("");
+  
+  // Sign Transaction states
+  const [ttxraws, setTtxraws] = useState<string>("");
+  const [utxosSatoshis, setUtxosSatoshis] = useState<string>("");
+  const [scriptPubkeys, setScriptPubkeys] = useState<string>("");
+  const [signTransactionResponse, setSignTransactionResponse] = useState<string>("");
+  
+  // Encrypt/Decrypt states
+  const [encryptMessage, setEncryptMessage] = useState<string>("");
+  const [decryptMessage, setDecryptMessage] = useState<string>("");
+  const [encryptResponse, setEncryptResponse] = useState<string>("");
+  const [decryptResponse, setDecryptResponse] = useState<string>("");
 
   const handleConnect = async () => {
     if (!wallet.connect) {
@@ -66,6 +77,69 @@ export const SamplePage = () => {
       alert(response)
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  // Sign Transaction function
+  const walletSignTransaction = async () => {
+    if (!ttxraws || !utxosSatoshis || !scriptPubkeys) {
+      alert("Please fill in all transaction signing fields");
+      return;
+    }
+    
+    try {
+      const ttxrawsArray = ttxraws.split('\n').filter(line => line.trim());
+      const utxosSatoshisArray = JSON.parse(utxosSatoshis);
+      const scriptPubkeysArray = JSON.parse(scriptPubkeys);
+      
+      const response = await wallet.signTransaction({
+        ttxraws: ttxrawsArray,
+        utxos_satoshis: utxosSatoshisArray,
+        script_pubkeys: scriptPubkeysArray
+      });
+      
+      const formattedResponse = JSON.stringify(response, null, 2);
+      setSignTransactionResponse(formattedResponse);
+    } catch (error) {
+      console.error("Sign transaction error:", error);
+      alert("Failed to sign transaction");
+      setSignTransactionResponse("");
+    }
+  };
+
+  // Encrypt function
+  const walletEncrypt = async () => {
+    if (!encryptMessage) {
+      alert("Please enter a message to encrypt");
+      return;
+    }
+    
+    try {
+      const response = await wallet.encrypt({ message: encryptMessage });
+      const formattedResponse = JSON.stringify(response, null, 2);
+      setEncryptResponse(formattedResponse);
+    } catch (error) {
+      console.error("Encrypt error:", error);
+      alert("Failed to encrypt message");
+      setEncryptResponse("");
+    }
+  };
+
+  // Decrypt function
+  const walletDecrypt = async () => {
+    if (!decryptMessage) {
+      alert("Please enter a message to decrypt");
+      return;
+    }
+    
+    try {
+      const response = await wallet.decrypt({ message: decryptMessage });
+      const formattedResponse = JSON.stringify(response, null, 2);
+      setDecryptResponse(formattedResponse);
+    } catch (error) {
+      console.error("Decrypt error:", error);
+      alert("Failed to decrypt message");
+      setDecryptResponse("");
     }
   };
 
@@ -430,6 +504,190 @@ export const SamplePage = () => {
                 style={{ 
                   padding: "0.5rem",
                   minHeight: "150px",
+                  borderRadius: "4px",
+                  backgroundColor: "#f5f5f5",
+                  fontFamily: "monospace",
+                  fontSize: "14px",
+                  whiteSpace: "pre"
+                }}
+              />
+            </div>
+          </div>
+
+          <h1>Sign Transaction Demo</h1>
+          <div style={{ 
+            display: "flex", 
+            gap: "2rem",
+            marginBottom: "2rem",
+            width: "100%",
+            maxWidth: "1200px"
+          }}>
+            <div style={{ 
+              display: "flex", 
+              flexDirection: "column", 
+              gap: "1rem",
+              flex: 1
+            }}>
+              <textarea
+                value={ttxraws}
+                onChange={(e) => setTtxraws(e.target.value)}
+                placeholder="Enter ttxraws (one per line)"
+                style={{ 
+                  padding: "0.5rem",
+                  minHeight: "80px",
+                  borderRadius: "4px"
+                }}
+              />
+              <textarea
+                value={utxosSatoshis}
+                onChange={(e) => setUtxosSatoshis(e.target.value)}
+                placeholder="Enter utxos_satoshis (JSON array of arrays)"
+                style={{ 
+                  padding: "0.5rem",
+                  minHeight: "80px",
+                  borderRadius: "4px"
+                }}
+              />
+              <textarea
+                value={scriptPubkeys}
+                onChange={(e) => setScriptPubkeys(e.target.value)}
+                placeholder="Enter script_pubkeys (JSON array of arrays)"
+                style={{ 
+                  padding: "0.5rem",
+                  minHeight: "80px",
+                  borderRadius: "4px"
+                }}
+              />
+              <button 
+                onClick={walletSignTransaction}
+                style={{
+                  padding: "0.5rem 1rem",
+                  borderRadius: "4px",
+                  backgroundColor: "#2196F3",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer"
+                }}
+              >
+                Sign Transaction
+              </button>
+            </div>
+            
+            <div style={{ 
+              display: "flex", 
+              flexDirection: "column", 
+              gap: "1rem",
+              flex: 1
+            }}>
+              <h3 style={{ margin: 0 }}>Sign Transaction Result:</h3>
+              <textarea
+                value={signTransactionResponse}
+                readOnly
+                placeholder="Signature result will appear here"
+                style={{ 
+                  padding: "0.5rem",
+                  minHeight: "250px",
+                  borderRadius: "4px",
+                  backgroundColor: "#f5f5f5",
+                  fontFamily: "monospace",
+                  fontSize: "14px",
+                  whiteSpace: "pre"
+                }}
+              />
+            </div>
+          </div>
+
+          <h1>Encrypt/Decrypt Demo</h1>
+          <div style={{ 
+            display: "flex", 
+            gap: "2rem",
+            marginBottom: "2rem",
+            width: "100%",
+            maxWidth: "1200px"
+          }}>
+            <div style={{ 
+              display: "flex", 
+              flexDirection: "column", 
+              gap: "1rem",
+              flex: 1
+            }}>
+              <h3 style={{ margin: 0 }}>Encrypt Message:</h3>
+              <textarea
+                value={encryptMessage}
+                onChange={(e) => setEncryptMessage(e.target.value)}
+                placeholder="Enter message to encrypt"
+                style={{ 
+                  padding: "0.5rem",
+                  minHeight: "100px",
+                  borderRadius: "4px"
+                }}
+              />
+              <button 
+                onClick={walletEncrypt}
+                style={{
+                  padding: "0.5rem 1rem",
+                  borderRadius: "4px",
+                  backgroundColor: "#FF9800",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer"
+                }}
+              >
+                Encrypt
+              </button>
+              <textarea
+                value={encryptResponse}
+                readOnly
+                placeholder="Encrypted result will appear here"
+                style={{ 
+                  padding: "0.5rem",
+                  minHeight: "100px",
+                  borderRadius: "4px",
+                  backgroundColor: "#f5f5f5",
+                  fontFamily: "monospace",
+                  fontSize: "14px",
+                  whiteSpace: "pre"
+                }}
+              />
+            </div>
+            
+            <div style={{ 
+              display: "flex", 
+              flexDirection: "column", 
+              gap: "1rem",
+              flex: 1
+            }}>
+              <h3 style={{ margin: 0 }}>Decrypt Message:</h3>
+              <textarea
+                value={decryptMessage}
+                onChange={(e) => setDecryptMessage(e.target.value)}
+                placeholder="Enter message to decrypt"
+                style={{ 
+                  padding: "0.5rem",
+                  minHeight: "100px",
+                  borderRadius: "4px"
+                }}
+              />
+              <button 
+                onClick={walletDecrypt}
+                style={{
+                  padding: "0.5rem 1rem",
+                  borderRadius: "4px",
+                  backgroundColor: "#9C27B0",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer"
+                }}
+              >
+                Decrypt
+              </button>
+              <textarea
+                value={decryptResponse}
+                readOnly
+                placeholder="Decrypted result will appear here"
+                style={{ 
+                  padding: "0.5rem",
+                  minHeight: "100px",
                   borderRadius: "4px",
                   backgroundColor: "#f5f5f5",
                   fontFamily: "monospace",
